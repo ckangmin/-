@@ -19,7 +19,7 @@ public class BoardMapperTests {
 	@Autowired
 	private BoardMapper mapper;
 	
-	//@Test
+	@Test
 	public void testGetList() {
 		List<BoardVO> boards = mapper.getList();
 		boards.forEach(board -> {
@@ -41,13 +41,30 @@ public class BoardMapperTests {
 	}
 	
 	public void getOne() {
-		BoardVO boardOne=mapper.read(6);
+		BoardVO boardOne=mapper.read(6L);
 		log.info(boardOne);
 	}
-	@Test
+	//@Test
 	public void testDelete() {
-		mapper.delete(1);
+		mapper.delete(1L);
 		log.info("delete 성공");
 		testGetList();
+	}
+	//@Test
+	public void testUpdate() {
+	// 수정 내역은 BoardVO에 담아서 보내야합니다.
+	//BoardVO를 생성해 주시고 필요정보(bno, title, content);
+	//를세팅해서 수정구문을 실행해주세요.
+		
+		BoardVO board=new BoardVO();
+		board.setBno(3L);
+		board.setTitle("update Test");
+		board.setContent("updater");
+		int count =mapper.update(board);
+		log.info("번경된 컬럼수 :" +count);
+	
+	
+
+
 	}
 }

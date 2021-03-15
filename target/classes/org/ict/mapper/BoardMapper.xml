@@ -34,4 +34,10 @@
  		DELETE FROM ictboard WHERE bno=#{bno}
 
  	</delete>
+ 	<update id="update">
+ 	update ictboard set title = #{title}, content = #{content}, updatedate = now()
+		where bno = #{bno}
+ 	
+ 	
+ 	</update>
  </mapper>

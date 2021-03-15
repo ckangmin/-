@@ -27,11 +27,19 @@ public interface BoardMapper {
 	//따라서 리턴 자료형은 글 하나에 해당하는 BoardVO로만 처리해도되며
 	//글의 식별은 글 번호로 하기 때문에 파라미터는  int bno 입니다.
 	//이러면 글 번호 bno가 bno라는 이름으로 마이바티스에 전달됩니다.
-	public BoardVO read(int bno);
+	public BoardVO read(Long bno);
 	// delete 구문은 게시물을 삭제할 때 번호로 구분해서 삭제합니다.
 	// 따라서 역시 bno를 전달합니다.
-	public void delete(int bno);
+	public void delete(Long bno);
+	//delete, insert, update 구문은
+	//return자료형이 원래는 void로 해도 상관없으나
+	//row 몇 개가 변경되었는지는 체크할 필요가 있기때문에
+	//return자료형에 int자료형을 정의하는 것을 허용합니다.
+	//이 경우, mapper xml에서는 resultType을 명시하지 않습니다.
+	
+	public int update(BoardVO board);
 }
 
+	
 
 
