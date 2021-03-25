@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
+import org.ict.domain.SearchCriteria;
 
 // 마이바티티스는 인터페이스 메서드를 정의한 다음
 // xml파일에 메서드 실행시 동작시킬 쿼리문을 분리해 저장합니다.
@@ -30,7 +32,7 @@ public interface BoardMapper {
 	public BoardVO read(Long bno);
 	// delete 구문은 게시물을 삭제할 때 번호로 구분해서 삭제합니다.
 	// 따라서 역시 bno를 전달합니다.
-	public void delete(Long bno);
+	public int delete(Long bno);
 	//delete, insert, update 구문은
 	//return자료형이 원래는 void로 해도 상관없으나
 	//row 몇 개가 변경되었는지는 체크할 필요가 있기때문에
@@ -38,6 +40,8 @@ public interface BoardMapper {
 	//이 경우, mapper xml에서는 resultType을 명시하지 않습니다.
 	
 	public int update(BoardVO board);
+	public List<BoardVO> listPage(SearchCriteria cri);
+	public int countPageNum(SearchCriteria cri);
 }
 
 	

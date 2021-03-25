@@ -3,6 +3,7 @@ package org.ict.mapper;
 import java.util.List;
 
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class BoardMapperTests {
 	@Autowired
 	private BoardMapper mapper;
 	
-	@Test
+
+	//@Test
 	public void testGetList() {
 		List<BoardVO> boards = mapper.getList();
 		boards.forEach(board -> {
@@ -67,4 +69,16 @@ public class BoardMapperTests {
 
 
 	}
+
+//	@Test
+//	public void limit() {
+//		Criteria cri= new Criteria();
+//		cri.setPage(1);
+//		cri.setNumber(2);
+//		List<BoardVO> boards = mapper.listPage(cri);
+//		
+//		boards.forEach(board -> {
+//			log.info(board);
+//		});
+//	}
 }

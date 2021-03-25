@@ -35,27 +35,38 @@ public class BoardServiceTests {
 		BoardVO boardOne=service.get(6L);
 		log.info(boardOne);
 	}
-	
+	@Test
 	public void serviceRemove() {
 		service.remove(4L);
+		if(service.get(4L)==null) {
 		log.info("delete 성공");
-		
+		}
 	}
+	//@Test
 	public void serviceModify() {
-		// 수정 내역은 BoardVO에 담아서 보내야합니다.
-		//BoardVO를 생성해 주시고 필요정보(bno, title, content);
-		//를세팅해서 수정구문을 실행해주세요.
+		//실제 수정로직은 수정 이전에
+		//1. 특정 글의 전체 내용을 가져와 수정창에 뿌린다.
+		//2. 뿌려진 내용 중 수정하고 싶은 내용을 수정한다.
+		//3. 수정된 내용을 제출버튼을 통해 최종 반영한다.
+		//따라서 위 로직을 따라가기 위해 이번에는
+		//BoardVO를 생성하는 대신
+		//get메서드를 활용해서 실제 글 내용을 먼저 가져온다음
+		//수정된 내용이 DB에 반영되도록 하겠다.
+		
 			
-			BoardVO board=new BoardVO();
-			board.setBno(3L);
-			board.setTitle("update Test");
-			board.setContent("updater");
+			BoardVO board=service.get(4L);
+			// get으로 가져온 번호의 게시글이 없는 경우 중지
+			if(board==null) {
+				return;
+			}
+			board.setTitle("Modify반영제목");
+			board.setContent("Modify반영 본문");
 			service.modify(board);
+			log.info(board);
 	}
-	@Test
+	//@Test
 	public void serviceGetList() {
-		List<BoardVO> boards = service.getList();
-		boards.forEach(board -> {
+		service.getList().forEach(board -> {
 			log.info(board);
 		});
 	}

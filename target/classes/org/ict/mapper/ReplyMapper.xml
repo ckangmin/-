@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+	<mapper namespace="org.ict.mapper.ReplyMapper">
+	<select id="getList" resultType="org.ict.domain.ReplyVO">
+	
+		select * from ictreply
+		where bno=#{bno}
+		order by rno desc;
+	
+	</select>
+	<update id="update">
+		update ictreply
+		set
+		replytext=#{replytext}, updatadate =now()
+		where rno=#{rno}
+	
+	</update>
+	<insert id="create">
+		insert into ictreply (bno, replytext, replyer)
+			values (#{bno}, #{replytext}, #{replyer})
+	
+	</insert>
+	<delete id="delete">
+	
+		delete from ictreply
+		where rno= #{rno}
+	
+	</delete>
+	
+	
+	</mapper>

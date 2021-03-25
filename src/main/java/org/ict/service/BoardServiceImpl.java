@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.javassist.expr.Cast;
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
+import org.ict.domain.SearchCriteria;
 import org.ict.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,15 +43,15 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	//update
 	public boolean modify(BoardVO board) {
-		mapper.update(board);
-		return false;
+		
+		return mapper.update(board)==1;
 	}
 
 	@Override
 	//delete
 	public boolean remove(Long bno) {
-		mapper.delete(bno);
-		return false;
+		
+		return mapper.delete(bno)==1;
 	}
 
 	@Override
@@ -58,5 +60,15 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getList();
 	}
 
-	
+	@Override
+	public List<BoardVO> getPage(SearchCriteria crt){
+		return mapper.listPage(crt);
+	}
+
+
+	@Override
+	public int getCountPage(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.countPageNum(cri);
+	}
 }
