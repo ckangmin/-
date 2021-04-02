@@ -30,6 +30,14 @@
 		where rno= #{rno}
 	
 	</delete>
+	<delete id="deleteAll">
+		delete from ictreply
+		where bno=#{bno}
 	
+	</delete>
+	<select id="getBno" resultType="Long">
+		select bno from ictreply
+			where rno=#{rno}
+	</select>
 	
 	</mapper>

@@ -5,12 +5,14 @@ import org.ict.domain.Criteria;
 import org.ict.domain.PageMaker;
 import org.ict.domain.SearchCriteria;
 import org.ict.service.BoardService;
+import org.ict.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
@@ -31,7 +33,8 @@ public class BoardController {
 	// 실행하기 위해서 객체 선언 및 자동주입을 해 주세요.
 	@Autowired
 	private BoardService service;
-	
+	@Autowired
+	private ReplyService reservice;
 	// "/list" 주소를 가지는 list 메서드를 만들어주세요.
 	// void 리턴을 하며, .addAttribute()를 이용해
 	// list라는 이름으로 전체 글 목록을 뷰에 전달합니다.
@@ -94,11 +97,12 @@ public class BoardController {
 	// 구현해보세요.
 	// 지금 현재 메서드가 출력할 .jsp 파일을 생성하고,
 	// 그 파일 내부에 bno번 글을 표출해주세요.
-	@GetMapping("/get")
+	@RequestMapping(value = "/get", method= {RequestMethod.GET, RequestMethod.POST})
 	public void get(Long bno, Model model, 
 			SearchCriteria cri){
 		model.addAttribute("cri", cri);
 		model.addAttribute("board", service.get(bno));
+		
 	}
 	
 	// 수정 기능을 담당하는 modify메서드를 만들어보겠습니다.

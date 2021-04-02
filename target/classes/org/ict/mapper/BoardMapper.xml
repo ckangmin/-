@@ -91,7 +91,7 @@
 		<!-- 아래 <![CDATA[ 는 닫는부분인 ]]> 사이의 모든 문자를
 		쿼리문으로만 인식하고 태그요소로 인식하지 않게 함. -->
 		<![CDATA[
-			SELECT bno, title, content, writer, regdate, updatedate
+			SELECT bno, title, content, writer, regdate, updatedate, replycount
 				FROM ictboard
 				WHERE bno > 0
 		]]>				
@@ -110,7 +110,12 @@
 		<include refid="search"></include>
 	</select>
 	
+	<update id="updateReplyCount">
+		update ictboard
+			set
+		replycount = replycount + #{amount} where bno= #{bno}
 	
+	</update>
 
 
 </mapper>

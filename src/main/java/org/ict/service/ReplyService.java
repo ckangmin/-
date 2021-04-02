@@ -9,4 +9,5 @@ public interface ReplyService {
 	public List	<ReplyVO> listReply(Long bno);
 	public void modifyReply(ReplyVO vo);
 	public void removeReply(int rno);
+
 }

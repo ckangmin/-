@@ -23,6 +23,8 @@ public interface BoardService {
 	public List<BoardVO> getListPage(SearchCriteria cri);
 
 	public int getCountPage(SearchCriteria cri);
+	
+	
 }
 
 

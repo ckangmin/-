@@ -6,8 +6,10 @@ import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
 import org.ict.domain.SearchCriteria;
 import org.ict.mapper.BoardMapper;
+import org.ict.mapper.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 // 서비스 구현체에는 인터페이스의 메서드를 구현합니다.
 // 이 클래스는 bean-container에 집어넣어야 호출할 수 있습니다.
@@ -20,6 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
 	
+	@Autowired
+	private ReplyMapper replymapper;
 	// 메서드 실행용 테스트코드를 만들어주세요.
 	// src/test/java 하위에 org.ict.service 패키지를 만들고
 	// BoardServiceTests 클래스파일을 만들어주세요.
@@ -48,9 +52,10 @@ public class BoardServiceImpl implements BoardService {
 	public boolean modify(BoardVO board) {
 		return mapper.update(board) == 1;
 	}
-
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
+		replymapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 
